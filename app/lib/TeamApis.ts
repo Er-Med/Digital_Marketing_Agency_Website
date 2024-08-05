@@ -1,7 +1,7 @@
-import axiosClient from "./axiosClient";
+// import axiosClient from "./axiosClient";
 
-const getTeamMembers = () => axiosClient.get('/team-members?populate=*');
+// const getTeamMembers = () => axiosClient.get('/team-members?populate=*');
 
-export {
-    getTeamMembers
-}
+// export {
+//     getTeamMembers
+// }

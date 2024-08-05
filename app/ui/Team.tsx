@@ -4,12 +4,11 @@ import blogimg from "@/public/images/men.png"
 import Link from "next/link";
 import { PiArrowRightFill } from "react-icons/pi";
 import Button from "./Button";
-import teamApi from "@/app/lib/TeamApis"
+// import teamApi from "@/app/lib/TeamApis"
 
 import { usePathname } from 'next/navigation'
 import { log } from "console";
 import { useEffect, useState } from "react";
-import TeamApis from "@/app/lib/TeamApis";
 
 type ImageAttributes = {
     name: string;
@@ -38,12 +37,12 @@ type Member = {
 export default function Team() {
     const [teamMembers, setTeamMembers] = useState([])
 
-    const getTeamMembers_ = () => {
-        TeamApis.getTeamMembers().then(res => {
-            setTeamMembers(res.data.data)
+    // const getTeamMembers_ = () => {
+    //     TeamApis.getTeamMembers().then(res => {
+    //         setTeamMembers(res.data.data)
 
-        })
-    }
+    //     })
+    // }
 
     // useEffect(() => {
     //     getTeamMembers_();
