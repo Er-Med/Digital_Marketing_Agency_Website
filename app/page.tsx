@@ -194,16 +194,16 @@ export default function Home() {
           <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center  mx-auto mb-14 md:mb-20 *:!text-[3rem]  rounded-lg bg-orange-50">
             <Title text="Our" highlited="Team" textColor="--black_color" />
           </div>
-          <div className="absolute bottom-0 left-0 w-[33%] opacity-50 z-10">
+          <div className="absolute bottom-[12%] md:bottom-0 left-0 w-[50%] md:w-[33%] opacity-90 md:opacity-50 z-10">
             <Image alt="" src={svgImg} className="text-black"></Image>
           </div>
-          <div className="absolute bottom-0 right-0 w-[33%] opacity-50 z-10">
+          <div className="absolute bottom-[12%] md:bottom-0 right-0 w-[50%] md:w-[33%] opacity-90 md:opacity-50 z-10">
             <Image alt="" src={svgImg} className="text-black"></Image>
           </div>
-          <div className="absolute top-0 left-0 w-[33%] opacity-50 z-10">
+          <div className="absolute top-0 left-[12%] md:left-0 w-[50%] md:w-[33%] opacity-90 md:opacity-50 z-10">
             <Image alt="" src={svgImg} className="text-black"></Image>
           </div>
-          <div className="absolute top-0 right-0 w-[33%] opacity-50 z-10">
+          <div className="absolute top-[12%] md:top-0 right-0 w-[50%] md:w-[33%] opacity-90 md:opacity-50 z-10">
             <Image alt="" src={svgImg} className="text-black"></Image>
           </div>
           <div className="mx-2 md:mx-0 bg-orange-50">
