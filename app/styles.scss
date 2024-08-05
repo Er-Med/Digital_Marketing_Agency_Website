@@ -391,7 +391,7 @@ $background-color_2: rgb(181, 160, 255);
 /* From Uiverse.io by vinodjangid07 */
 .button {
     width: 50px;
-    z-index: 5;
+    z-index: 1000;
     height: 50px;
     border-radius: 50%;
     background-color: var(--primary_color);
