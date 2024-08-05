@@ -71,6 +71,9 @@ export const Header = () => {
                     <li className={currentPath === "/" ? "active" : ''} onClick={handleMobileBar}>
                         <Link href="/" className={`${nunitoFont} text-xl font-[600]`}>Home</Link>
                     </li>
+                    <li className={currentPath === "/" ? "active" : ''} onClick={handleMobileBar}>
+                        <Link href="/" className={`${nunitoFont} text-xl font-[600]`}>Home</Link>
+                    </li>
                     <li className={currentPath === "/about" ? "active" : ''} onClick={handleMobileBar}>
                         <Link href="/about" className={`${nunitoFont} text-xl font-[600]`}>About</Link>
                     </li>
