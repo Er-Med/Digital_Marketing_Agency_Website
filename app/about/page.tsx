@@ -154,7 +154,7 @@ export default function page() {
                     <div className="  mx-auto mt-8 md:w-4/6 divide-y">
                         {
                             faq.map((faq, index) => (
-                                <div className="py-8">
+                                <div className="py-8" key={index}>
                                     <details className=" group" >
                                         <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
                                             <h3 className="text-2xl  font-normal"> {faq.quetion}</h3>
