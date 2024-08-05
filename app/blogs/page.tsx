@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Footer from "../ui/Footer";
 import { Header } from "../ui/Header";
-import blogimg from "@/public/images/men.png"
+import blogimg from "@/public/images/images-1000x500.jpg"
 import Link from "next/link";
 import { PiArrowRightFill } from "react-icons/pi";
 import "@/app/styles.scss"
@@ -26,8 +26,8 @@ export default function page() {
                 {/* START Last blog Section */}
                 <section className="xl:w-4/5 mx-auto mt-24 md:mt-0">
                     <div className="grid  xl:grid-cols-2 gap-4  xl:gap-32 mb-16 md:mb-24 ">
-                        <div className="w-full md:-order-1 xl:order-1">
-                            <Image className=" object-cover w-full object-covers  rounded-md  min-h-full aspect-[16/10]" src={blogimg} alt="blog image" />
+                        <div className="w-full md:-order-1 xl:order-1 border-2 border- p-2 rounded-sm ">
+                            <Image className=" object-cover w-full object-covers  rounded-sm  min-h-full aspect-[16/10]" src={blogimg} alt="blog image" />
                         </div>
                         <div className="flex flex-col gap-4">
                             <div className="flex gap-3 items-center">

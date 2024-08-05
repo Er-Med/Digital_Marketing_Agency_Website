@@ -1,3 +1,4 @@
+import svgImg from "@/public/squares.svg"
 import Image from "next/image";
 import logo from "@/public/logo.svg"
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
@@ -5,7 +6,7 @@ import Link from "next/link";
 import { RiTwitterXLine } from "react-icons/ri";
 export default function Footer() {
     return (
-        <div className="py-16 pt-24">
+        <div className="py-16 pt-24 relative">
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 border-y my-5 py-8 gap-y-7">
 
@@ -46,6 +47,7 @@ export default function Footer() {
 
             </div>
             <p className="text-center">�� 2023 Go Brand. All rights reserved.</p>
+
         </div>
     );
 }

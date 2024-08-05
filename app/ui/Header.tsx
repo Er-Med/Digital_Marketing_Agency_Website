@@ -16,8 +16,13 @@ export const Header = () => {
         setIsDropdownOpen(prev => !prev);
     };
 
+    const closeDropDown = () => {
+        setIsDropdownOpen(false);
+    }
+
     const handleMobileBar = () => {
         setIsOpen(!isOpen)
+        setIsDropdownOpen(false)
     }
 
     const list = [
@@ -74,7 +79,8 @@ export const Header = () => {
                     <li className={currentPath === "/about" ? "active" : ''} onClick={handleMobileBar}>
                         <Link href="/about" className={`${nunitoFont} text-xl font-[600]`}>About</Link>
                     </li>
-                    <li className={currentPath === "/services" ? "active relative cursor-pointer" : 'relative cursor-pointer'} onClick={handleDropdownToggle} onBlur={handleDropdownToggle} >
+                    {/* services li */}
+                    <li className={/services\/.+/.test(currentPath) ? "active relative cursor-pointer" : 'relative cursor-pointer'} onClick={handleDropdownToggle}  >
                         <span className={`${nunitoFont} text-xl font-[600]`}>Services</span>
                         {/* Sous list  */}
                         <ul className={`absolute -left-4  mt-6 z-50 bg-white rounded-md  shadow-sm divide-y divide-[--light_gray_color] [box-shadow:0_15px_32px_rgba(0,_0,_0,_0.1)] ${isDropdownOpen ? 'flex' : 'hidden'} w-[250px] flex-col`}>
@@ -82,9 +88,12 @@ export const Header = () => {
 
                                 Array.isArray(list) && list.length > 0 && (
                                     list.map((service, index) => (
-                                        <li className="text-lg relative font-semibold py-2 px-4 duration-200 hover:bg-orange-500 hover:first-line:text-white group" key={index}
+                                        <li
+                                            className="text-lg relative font-semibold  duration-200 hover:bg-orange-500 hover:first-line:text-white group"
+                                            key={index}
+                                            onClick={closeDropDown}
                                         >
-                                            <Link href={`/services/${service.id}`} className=" ">
+                                            <Link href={`/services/${service.id}`} className="py-2 px-4 block ">
                                                 {service.name}
                                             </Link>
                                             {
@@ -92,7 +101,11 @@ export const Header = () => {
                                                     <ul className="absolute left-[100%] top-[10%] font-semibold text-base divide-y divide-[--light_gray_color] [box-shadow:0_15px_32px_rgba(0,_0,_0,_0.1)] z-50 bg-white rounded-md   hidden group-hover:block min-w-[150px] ">
                                                         {
                                                             service.sous_services.map((sousService, index) => (
-                                                                <li className="px-4 py-2 duration-200 hover:bg-orange-500 hover:first-line:text-white" key={index}>
+                                                                <li
+                                                                    className="px-4 py-2 duration-200 hover:bg-orange-500 hover:first-line:text-white"
+                                                                    key={index}
+                                                                    onClick={closeDropDown}
+                                                                >
                                                                     <Link href={`/services/${service.id}/${sousService.id}`} className="">{sousService.name}</Link></li>
                                                             ))
                                                         }
@@ -108,6 +121,7 @@ export const Header = () => {
 
                         {/* EndSous list  */}
                     </li>
+                    {/*END services li */}
                     <li className={currentPath === "/blogs" ? "active" : ''} onClick={handleMobileBar}>
                         <Link href="/blogs" className={`${nunitoFont} text-xl font-[600]`}>News</Link>
                     </li>

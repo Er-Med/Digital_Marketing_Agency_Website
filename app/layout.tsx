@@ -4,6 +4,7 @@ import { nunito, syne } from "@/app/ui/fonts";
 import "./globals.css";
 import { Header } from "./ui/Header";
 import Footer from "./ui/Footer";
+import ScrollButton from "./ui/ScrollButton";
 
 export const metadata: Metadata = {
   title: "Create Next App",

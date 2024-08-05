@@ -63,7 +63,7 @@ export default function Services({ services }: ServicesProps) {
                 <div className="grid sm:grid-cols-2 md:grid-cols-3  lg:w-[90%]  mx-auto gap-y-14 gap-x-8">
                     {
                         services.map((service, index) => (
-                            <div key={index} className=" mx-auto">
+                            <div key={index} className=" mx-auto relative z-40 bg-orange-50">
                                 <Link href={`/services/${index}`} className="" >
                                     <div
                                         className="group flex flex-col justify-start items-start gap-2 xl:w-[80%] h-fit duration-500 relative rounded-lg px-4 py-8 -translate-y-2 [box-shadow:rgba(17,_17,_26,_0.1)_0px_8px_24px,_rgba(17,_17,_26,_0.1)_0px_16px_56px,_rgba(17,_17,_26,_0.1)_0px_24px_80px]  hovered_card"

@@ -6,7 +6,7 @@ import Clients from "../ui/Clients";
 import Hero from "../ui/Hero";
 import Title from "../ui/Title";
 import Image from "next/image";
-import img from "@/public/images/projImg.png"
+import img from "@/public/images/Wavy_Tech-30_Single-02.jpg"
 import { MdAccessibilityNew } from "react-icons/md";
 import NewsBanner from "../ui/BlogsBanner";
 
@@ -96,16 +96,16 @@ export default function page() {
                     <Statistics />
                 </section>
 
-                <section className="mb-24 md:mb-32" >
+                <section className="mb-24 md:mb-32 grid " >
                     {
                         texts.map((ele, index) => (
 
-                            <div className="flex flex-wrap gap-10 items-center" key={index}>
-                                <div className={`flex-1  ${index % 2 !== 0 ? "md:order-2" : ''}`}>
-                                    <h2 className="mb-4 md:mb-8 text-3xl md:text-5xl text-center md:text-start font-bold">{ele.title}</h2>
-                                    <p className="text-lg md:text-xl font-medium  mb-10 text-[#4b5563] text-center md:text-justify border-b pb-4 md:border-0 md:pb-0">{ele.text}</p>
+                            <div className="grid lg:grid-cols-2  gap-y-5  items-center" key={index}>
+                                <div className={`  ${index % 2 !== 0 ? "lg:order-2" : ''}`}>
+                                    <h2 className="mb-4 lg:mb-8 text-3xl lg:text-5xl text-center lg:text-start font-bold">{ele.title}</h2>
+                                    <p className="text-lg lg:text-xl font-medium  mb-10 text-[#4b5563] text-center lg:text-justify border-b pb-4 lg:border-0 lg:pb-0">{ele.text}</p>
                                 </div>
-                                <Image src={img} alt="about us image" className="hidden md:block rounded-md flex-1 aspect-video object-cover w-4/5" />
+                                <Image src={img} alt="about us image" className="hidden lg:block rounded-md  h-full object-cover w-full" />
                             </div>
                         ))
                     }
@@ -157,7 +157,7 @@ export default function page() {
                                 <div className="py-8" key={index}>
                                     <details className=" group" >
                                         <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                            <h3 className="text-2xl  font-normal"> {faq.quetion}</h3>
+                                            <h3 className="text-2xl  font-semibold"> {faq.quetion}</h3>
                                             <span className="transition group-open:rotate-180">
                                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

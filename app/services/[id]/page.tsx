@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import "@/app/styles.scss"
 import Hero from "@/app/ui/Hero";
 import Button from "@/app/ui/Button";
-import Img from "@/public/images/projImg.png"
+import Img from "@/public/images/Wavy_Tech-30_Single-02.jpg"
 import Image from "next/image";
 import { FaCircleCheck } from "react-icons/fa6";
 import Services from "@/app/ui/Services";
 import Title from "@/app/ui/Title";
 
-export default function servicePage() {
+export default function servicePage({ params }: { params: any }) {
 
     const sousServices = [
         {
@@ -43,7 +43,7 @@ export default function servicePage() {
 
                         <div className="col-span-1">
                             <div className="flex flex-col gap-6 justify-center">
-                                <h1 className=" text-4xl lg:text-5xl xl:text-6xl font-bold">Développement Web</h1>
+                                <h1 className=" text-4xl lg:text-5xl xl:text-6xl font-bold">Service {params.id}</h1>
                                 <p className="text-[--dark_gray_color] text-lg xl:text-xl">
                                     Créez une présence en ligne efficace avec des sites web sur mesure. Nous développons des sites web modernes, fonctionnels et optimisés pour offrir une expérience utilisateur exceptionnelle
                                 </p>

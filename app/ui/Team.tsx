@@ -104,7 +104,7 @@ export default function Team() {
     let homeTeam = team.slice(0, 6)
     return (
         <div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-9 gap-8 md:w-[70%] mx-auto">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-9 gap-8 md:w-[70%] mx-auto z-20 relative bg-orange-50">
                 {
                     team.map((member, index) => (
                         <div key={index} className=" flex flex-col items-center [box-shadow:rgba(17,_17,_26,_0.1)_0px_8px_24px,_rgba(17,_17,_26,_0.1)_0px_16px_56px,_rgba(17,_17,_26,_0.1)_0px_24px_80px] filter duration-300 grayscale-[1.4] hover:grayscale-0 rounded-lg">

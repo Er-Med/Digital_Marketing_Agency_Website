@@ -17,10 +17,12 @@ import Projects from "./ui/Services";
 import Services from "./ui/Services";
 import "@/app/styles.scss"
 import projImg from "@/public/images/projImg.png"
+import svgImg from "@/public/squares.svg"
 
 import React, { useRef, useState } from 'react';
 import Slider from "./ui/Slider";
 import Button from "./ui/Button";
+import ScrollButton from "./ui/ScrollButton";
 
 export default function Home() {
   const syneFont = syne.className;
@@ -66,8 +68,12 @@ export default function Home() {
 
   return (
     <main className="home">
+      {/* Got to Top btn */}
+      <ScrollButton />
+      {/*End Got to Top btn */}
+
       {/* <!--Start Background Animation Body--> */}
-      <div className="area">
+      {/* <div className="area">
         <ul className="circles">
           <li className=" !hidden md:!block"></li>
           <li></li>
@@ -80,9 +86,15 @@ export default function Home() {
           <li></li>
           <li></li>
         </ul>
-      </div>
-      {/* <!--End Background Animation Body--> */}
+      </div> */}
 
+      {/* <!--End Background Animation Body--> */}
+      <div className="absolute bottom-0 left-0 w-[40%] -z-10 opacity-50">
+        <Image alt="" src={svgImg} className="text-black"></Image>
+      </div>
+      <div className="absolute top-1/4 right-0 w-[40%] -z-10 opacity-50">
+        <Image alt="" src={svgImg} className="text-black"></Image>
+      </div>
       <div className="container px-4 md:px-14 mx-auto">
         {/* Hero Section */}
         <section className="relative">
@@ -96,12 +108,12 @@ export default function Home() {
             <div className="mx-auto  flex justify-center sm:px-6  lg:px-8">
               <div className="text-center ">
                 <h1
-                  className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-7xl ">
+                  className="text-4xl font-bold tracking-tight text-gray-900 bg-white sm:text-5xl md:text-7xl ">
                   <span className="block xl:inline">
                     <span className="mb-1 block">Beaucoup de choix</span>
                     Mais un seul choix gagnant
                   </span>
-                  <div className="mt-2">
+                  <div className="mt-2 bg-white">
                     <span className="relative mt-3 whitespace-nowrap text-[--primary_color]"><svg aria-hidden="true" viewBox="0 0 418 42"
                       className="absolute top-3/4 left-0 right-0 m-auto h-[0.58em] w-fit fill-purple-400"
                       preserveAspectRatio="none">
@@ -143,9 +155,21 @@ export default function Home() {
       </div>
 
 
-      <div className="bg-orange-50  mb-32 py-28 pb-40">
+      <div className="bg-orange-50  mb-32 py-28 pb-40 relative">
         <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center pb-5 mx-auto mb-14 md:mb-28  rounded-lg ">
           <Title text="Our" highlited="Services" textColor="--black_color" />
+        </div>
+        <div className="absolute bottom-0 left-0 w-[20%] opacity-50 z-10">
+          <Image alt="" src={svgImg} className="text-black"></Image>
+        </div>
+        <div className="absolute bottom-0 right-0 w-[20%] opacity-50 z-10">
+          <Image alt="" src={svgImg} className="text-black"></Image>
+        </div>
+        <div className="absolute top-0 left-0 w-[20%] opacity-50 z-10">
+          <Image alt="" src={svgImg} className="text-black"></Image>
+        </div>
+        <div className="absolute top-0 right-0 w-[20%] opacity-50 z-10">
+          <Image alt="" src={svgImg} className="text-black"></Image>
         </div>
         <Services services={services} />
       </div>
@@ -165,12 +189,24 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-orange-50 mt-20 md:mt-32  py-24 home-team">
+      <div className="bg-orange-50 mt-20 md:mt-32  py-24 home-team relative">
         <div className="container px-4  md:px-14 mx-auto ">
-          <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center  mx-auto mb-14 md:mb-20 *:!text-[3rem]  rounded-lg">
+          <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center  mx-auto mb-14 md:mb-20 *:!text-[3rem]  rounded-lg bg-orange-50">
             <Title text="Our" highlited="Team" textColor="--black_color" />
           </div>
-          <div className="mx-2 md:mx-0">
+          <div className="absolute bottom-0 left-0 w-[33%] opacity-50 z-10">
+            <Image alt="" src={svgImg} className="text-black"></Image>
+          </div>
+          <div className="absolute bottom-0 right-0 w-[33%] opacity-50 z-10">
+            <Image alt="" src={svgImg} className="text-black"></Image>
+          </div>
+          <div className="absolute top-0 left-0 w-[33%] opacity-50 z-10">
+            <Image alt="" src={svgImg} className="text-black"></Image>
+          </div>
+          <div className="absolute top-0 right-0 w-[33%] opacity-50 z-10">
+            <Image alt="" src={svgImg} className="text-black"></Image>
+          </div>
+          <div className="mx-2 md:mx-0 bg-orange-50">
             <Team />
           </div>
         </div>

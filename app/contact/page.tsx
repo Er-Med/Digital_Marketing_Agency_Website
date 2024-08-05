@@ -10,11 +10,7 @@ export default function page() {
         <div className="contact">
             <div className="container px-4  md:px-14 mx-auto">
                 <div className="lg:w-[80%] mx-auto ">
-                    <Hero title="Contact Us" desc="notre identité est façonnée par notre passion pour l'innovation et notre engagement envers l'excellence"
-                        btnHref="/contact"
-                        btnText="Join our Team"
-                        btnType="primary"
-                        titileSize="100px"
+                    <Hero title="Contact Us"
                         hideBtn={true}
                     />
                 </div>

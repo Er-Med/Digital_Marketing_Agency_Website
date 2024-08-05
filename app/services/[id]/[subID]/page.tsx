@@ -1,3 +1,4 @@
+'use client'
 import Footer from "@/app/ui/Footer";
 import { Header } from "@/app/ui/Header";
 import NewsBanner from "@/app/ui/BlogsBanner";
@@ -5,13 +6,16 @@ import { useRouter } from "next/router";
 import "@/app/styles.scss"
 import Hero from "@/app/ui/Hero";
 import Button from "@/app/ui/Button";
-import Img from "@/public/images/projImg.png"
+import Img from "@/public/images/Wavy_Tech-30_Single-02.jpg"
 import Image from "next/image";
 import { FaCircleCheck } from "react-icons/fa6";
 import Services from "@/app/ui/Services";
 import Title from "@/app/ui/Title";
+import { log } from "console";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
-export default function servicePage() {
+export default function ServicePage({ params }: { params: any }) {
 
     const sousServices = [
         {
@@ -34,6 +38,7 @@ export default function servicePage() {
         }
     ]
 
+
     return (
         <div>
             <div className="container px-4  md:px-14 mx-auto">
@@ -42,8 +47,8 @@ export default function servicePage() {
 
                         <div className="col-span-1">
                             <div className="flex flex-col gap-6 justify-center">
-                                <h1 className=" text-4xl lg:text-5xl xl:text-6xl font-bold">Développement Web</h1>
-                                <p className="text-[--dark_gray_color] text-lg xl:text-xl">
+                                <h1 className=" text-4xl lg:text-5xl xl:text-6xl font-bold">Sous Service {params.subID}</h1>
+                                <p className="text-[--dark_gray_color] text-lg xl:text-xl mb-4">
                                     Créez une présence en ligne efficace avec des sites web sur mesure. Nous développons des sites web modernes, fonctionnels et optimisés pour offrir une expérience utilisateur exceptionnelle
                                 </p>
                                 <ul className="flex flex-col gap-4 mb-8">
@@ -72,9 +77,9 @@ export default function servicePage() {
             {
                 sousServices && (
                     <section>
-                        <div className="bg-[--second_color] mb-32 py-32">
-                            <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center pb-5 mx-auto mb-14 md:mb-28   [box-shadow:rgba(0,_0,_0,_0.15)_1.95px_1.95px_2.6px] rounded-lg ">
-                                <Title text="Sous" highlited="Services" textColor="--white_color" />
+                        <div className="bg-orange-50 py-32">
+                            <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center pb-5 mx-auto mb-14 md:mb-20 rounded-lg ">
+                                <Title text="Sous" highlited="Services" textColor="--black_color" />
                             </div>
                             <Services services={sousServices} />
                         </div>
