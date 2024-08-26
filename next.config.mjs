@@ -5,7 +5,7 @@ const nextConfig = {
         includePaths: [path.join(dirname('styles'))],
     },
     images: {
-        domains: ['www.pexels.com'],
+        domains: ['www.pexels.com', 'localhost'],
     },
 };
 

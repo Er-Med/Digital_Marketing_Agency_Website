@@ -15,7 +15,7 @@ export default function WhatWeDo() {
                         The driving force of all speeches, we believe that creation should be the point around which any strategy revolves.
                     </p>
                 </div>
-                <Button type="second" text="See Our Process" href="/about" />
+                <Button type="second" text="Contact" href="#" />
             </div>
         </div>
     );

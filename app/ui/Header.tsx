@@ -1,133 +1,145 @@
 'use client'
-import Link from "next/link"
-import Image from "next/image"
-import logoSvg from "@/public/logo.svg"
-import { nunito } from "@/app/ui/fonts"
-import { FaBarsStaggered } from "react-icons/fa6"
-import { useState } from "react"
-import { IoClose } from "react-icons/io5"
-import { usePathname } from "next/navigation"
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { IoClose } from 'react-icons/io5';
+
+import { getHeaderData } from '../lib/data';
+
+interface SubService {
+    id: string;
+    name: string;
+    attributes: {
+        name: string;
+        sous_services?: SubService[];
+    }
+}
+
+interface NavigationLink {
+    id: string;
+    label: string;
+    url: string;
+    subLinks?: {
+        sub_services: {
+            data: SubService[];
+        };
+    } | null;
+}
+
 export const Header = () => {
-    const nunitoFont = nunito.className
+
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [headerData, setHeaderData] = useState(null);
+    const [logoImg, setLogoImg] = useState("");
+    const [navLinks, setNavLinks] = useState<NavigationLink[]>([]);
 
-    const handleDropdownToggle = () => {
-        setIsDropdownOpen(prev => !prev);
-    };
+    const currentPath = usePathname();
 
-    const closeDropDown = () => {
-        setIsDropdownOpen(false);
-    }
+    useEffect(() => {
+        async function fetchHeaderData() {
+            try {
+                const data = await getHeaderData()
+                setHeaderData(data)
+                const imgUrl = "http://localhost:1337" + data.data.attributes.logo_image.data.attributes.url;
+
+                setNavLinks(data.data.attributes.NavigationLinks)
+                setLogoImg(`${imgUrl}`)
+            } catch (err) {
+                setError("Failed to fetch data");
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchHeaderData()
+    }, [])
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+
+    const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+    const closeDropdown = () => setIsDropdownOpen(false);
 
     const handleMobileBar = () => {
         setIsOpen(!isOpen)
-        setIsDropdownOpen(false)
+        closeDropdown()
     }
 
-    const list = [
-        {
-            id: "1",
-            name: "service1",
-            sous_services: ""
-        },
-        {
-            id: "2",
-            name: "service2",
-            sous_services: [
-                { id: "1", name: "sous service 1" },
-                { id: "2", name: "sous service 2" },
-                { id: "3", name: "sous service 3" }
-            ]
-        },
-        {
-            id: "3",
-            name: "service3",
-            sous_services: [
-                { id: "1", name: "sous service 1" },
-                { id: "2", name: "sous service 2" },
-                { id: "3", name: "sous service 3" },
-                { id: "4", name: "sous service 4" }
-            ]
-        },
-        {
-            id: "4",
-            name: "service4",
-            sous_services: ""
-        }
-    ]
 
-    const currentPath = usePathname();
     return (
         <header className="header flex items-center justify-between py-8 border-b">
-            <div className="logo relative z-30">
+            <div className="logo relative z-30 w-[80px] h-[80px]">
                 <Link href="/">
-                    <Image src={logoSvg} alt="Website Logo" />
+                    <Image src={logoImg} alt="Website Logo" layout="fill" />
                 </Link>
             </div>
             <nav className="navbar">
                 <div onClick={handleMobileBar}>
-                    {
-                        !isOpen ? (<FaBarsStaggered className="birgger-icon text-3xl text-[--second_color] sm:hidden" />) : (<IoClose className="relative z-30 text-[3rem] sm:hidden text-white" />
-                        )
-                    }
+                    {isOpen ? (
+                        <IoClose className="relative z-30 text-[3rem] sm:hidden text-white" />
+                    ) : (
+                        <FaBarsStaggered className="birgger-icon text-3xl text-[--second_color] sm:hidden" />
+                    )}
                 </div>
-                <ul className={`flex gap-12 ${isOpen ? "activeList" : ""}`}>
-                    <li className={currentPath === "/" ? "active" : ''} onClick={handleMobileBar}>
-                        <Link href="/" className={`${nunitoFont} text-xl font-[600]`}>Home</Link>
-                    </li>
-                    <li className={currentPath === "/about" ? "active" : ''} onClick={handleMobileBar}>
-                        <Link href="/about" className={`${nunitoFont} text-xl font-[600]`}>About</Link>
-                    </li>
-                    {/* services li */}
-                    <li className={/services\/.+/.test(currentPath) ? "active relative cursor-pointer" : 'relative cursor-pointer'} onClick={handleDropdownToggle}  >
-                        <span className={`${nunitoFont} text-xl font-[600]`}>Services</span>
-                        {/* Sous list  */}
-                        <ul className={`absolute -left-4  mt-6 z-50 bg-white rounded-md  shadow-sm divide-y divide-[--light_gray_color] [box-shadow:0_15px_32px_rgba(0,_0,_0,_0.1)] ${isDropdownOpen ? 'flex' : 'hidden'} w-[250px] flex-col`}>
-                            {
+                <ul className={`flex gap-12 ${isOpen ? 'activeList' : ''}`}>
+                    {navLinks.map((link) => (
+                        link.subLinks === null ? (
+                            <li key={link.id} className={clsx("", { "active relative cursor-pointer": currentPath === link.url })} onClick={handleMobileBar}>
+                                <Link href={link.url} className={`text-xl font-[600]`}>{link.label}</Link>
+                            </li>
 
-                                Array.isArray(list) && list.length > 0 && (
-                                    list.map((service, index) => (
-                                        <li
+                        ) : (
+                            <li key={link.id}
+                                className={clsx("relative cursor-pointer", { "active relative cursor-pointer": /services\/.+/.test(currentPath) })}
+                                onClick={toggleDropdown} >
+                                <span className={`text-xl font-[600]`}>
+                                    {link.label}
+                                </span>
+
+                                {/* LEVEL 1  */}
+                                <ul className={`absolute -left-4  mt-6 z-50 bg-white rounded-md  shadow-sm divide-y divide-[--light_gray_color] [box-shadow:0_15px_32px_rgba(0,_0,_0,_0.1)] ${isDropdownOpen ? 'flex' : 'hidden'} w-[250px] flex-col`}>
+                                    {link.subLinks?.sub_services.data.map((subLink1) => (
+                                        <li key={subLink1.id}
                                             className="text-lg relative font-semibold  duration-200 hover:bg-orange-500 hover:first-line:text-white group"
-                                            key={index}
-                                            onClick={closeDropDown}
+                                            onClick={closeDropdown}
                                         >
-                                            <Link href={`/services/${service.id}`} className="py-2 px-4 block ">
-                                                {service.name}
+                                            <Link href={`/services/${subLink1.id}`} className="py-2 px-4 block ">
+                                                {subLink1.attributes.name}
                                             </Link>
-                                            {
-                                                Array.isArray(service.sous_services) && service.sous_services.length > 0 && (
-                                                    <ul className="absolute left-[100%] top-[10%] font-semibold text-base divide-y divide-[--light_gray_color] [box-shadow:0_15px_32px_rgba(0,_0,_0,_0.1)] z-50 bg-white rounded-md   hidden group-hover:block min-w-[150px] ">
-                                                        {
-                                                            service.sous_services.map((sousService, index) => (
-                                                                <li
-                                                                    className="px-4 py-2 duration-200 hover:bg-orange-500 hover:first-line:text-white"
-                                                                    key={index}
-                                                                    onClick={closeDropDown}
-                                                                >
-                                                                    <Link href={`/services/${service.id}/${sousService.id}`} className="">{sousService.name}</Link></li>
-                                                            ))
-                                                        }
-                                                    </ul>
-                                                )
+                                            {subLink1.attributes.sous_services && (
+                                                <ul className="absolute left-[100%] top-[10%] font-semibold text-base divide-y divide-[--light_gray_color] [box-shadow:0_15px_32px_rgba(0,_0,_0,_0.1)] z-50 bg-white rounded-md   hidden group-hover:block min-w-[150px] ">
+                                                    {
+                                                        subLink1.attributes.sous_services.map((subLink2) => (
+                                                            <li key={subLink2.id}
+                                                                className="px-4 py-2 duration-200 hover:bg-orange-500 hover:first-line:text-white"
+                                                                onClick={closeDropdown}
+                                                            >
+                                                                <Link href={`/services/${subLink1.id}/${subLink2.id}`} className="">{subLink2.name}</Link></li>
+                                                        ))
+                                                    }
+                                                </ul>
+                                            )
                                             }
                                         </li>
                                     ))
-                                )
-                            }
-                        </ul>
 
+                                    }
+                                </ul>
+                                {/* LEVEL 1 */}
 
-                        {/* EndSous list  */}
-                    </li>
-                    {/*END services li */}
-                    <li className={currentPath === "/blogs" ? "active" : ''} onClick={handleMobileBar}>
-                        <Link href="/blogs" className={`${nunitoFont} text-xl font-[600]`}>News</Link>
-                    </li>
-                    <li className={currentPath === "/contact" ? "active" : ''} onClick={handleMobileBar}>
-                        <Link href="/contact" className={`${nunitoFont} text-xl font-[600]`}>Contact</Link>
-                    </li>
+                            </li>
+                        )
+                    ))
+                    }
                 </ul>
             </nav >
         </header >

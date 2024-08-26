@@ -42,7 +42,7 @@ export default function ServicePage({ params }: { params: any }) {
     return (
         <div>
             <div className="container px-4  md:px-14 mx-auto">
-                <section className="bg-white dark:bg-gray-900 my-24 md:my-32">
+                <section className="bg-white  my-24 md:my-32">
                     <div className="grid lg:grid-cols-2 gap-24 xl:gap-44 justify-between content-start">
 
                         <div className="col-span-1">
@@ -74,7 +74,7 @@ export default function ServicePage({ params }: { params: any }) {
 
             </div>
 
-            {
+            {/* {
                 sousServices && (
                     <section>
                         <div className="bg-orange-50 py-32">
@@ -85,7 +85,7 @@ export default function ServicePage({ params }: { params: any }) {
                         </div>
                     </section>
                 )
-            }
+            } */}
 
             <div>
                 <NewsBanner />

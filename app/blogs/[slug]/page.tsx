@@ -27,7 +27,7 @@ export default function page({ params }: { params: any }) {
                                     <p className="w-fit md:text-lg text-[--dark_gray_color]">{lastPost.date}</p>
                                     <div className="flex-1 h-[2px] bg-[--dark_gray_color]"></div>
                                 </div>
-                                <h1 className="line-clamp-2 lg:line-clamp-1  text-xl md:text-4xl font-semibold">{lastPost.title}</h1>
+                                <h1 className="line-clamp-2 leading-10 text-xl md:text-4xl font-semibold">{lastPost.title}</h1>
                             </div>
                             <div className="w-full">
                                 <Image className=" object-cover  w-full object-covers mb-4 min-h-full aspect-video" src={lastPost.img} alt="blog image" />

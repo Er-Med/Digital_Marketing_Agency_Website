@@ -19,13 +19,72 @@ import "@/app/styles.scss"
 import projImg from "@/public/images/projImg.png"
 import svgImg from "@/public/squares.svg"
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Slider from "./ui/Slider";
 import Button from "./ui/Button";
 import ScrollButton from "./ui/ScrollButton";
+import { getHeroSectionData, getWhatWeDoSectionData, getClientsSectionData, getServicesSectionData, getTestimonialsData, getLatestBlogsData, getTeamData } from "./lib/data";
 
 export default function Home() {
-  const syneFont = syne.className;
+  const [heroSectionData, setHeroSectionData] = useState(null);
+  const [whatWeDoSectionData, setWhatWeDoSectionData] = useState(null);
+  const [clientsSectionData, setClientsSectionData] = useState(null);
+  const [servicesSectionData, setServicesSectionData] = useState(null);
+  const [testimonialsData, setTestimonialsData] = useState(null);
+  const [latestBlogsData, setLatestBlogsData] = useState(null);
+  const [teamData, setTeamData] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const heroData = await getHeroSectionData();
+        const whatWeDoData = await getWhatWeDoSectionData();
+        const clientsData = await getClientsSectionData();
+        const ServicesData = await getServicesSectionData();
+        const testimonialsData = await getTestimonialsData();
+        const latestBlogsData = await getLatestBlogsData();
+        const teamData = await getTeamData();
+
+        setHeroSectionData(heroData);
+        setWhatWeDoSectionData(whatWeDoData);
+        setClientsSectionData(clientsData);
+        setServicesSectionData(ServicesData);
+        setTestimonialsData(testimonialsData);
+        setLatestBlogsData(latestBlogsData);
+        setTeamData(teamData);
+
+      } catch (err) {
+        setError("Failed to fetch data");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [])
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // console.log(heroSectionData);
+  // console.log(whatWeDoSectionData);
+  // console.log(clientsSectionData);
+  // console.log(servicesSectionData);
+  // console.log(testimonialsData);
+  // console.log(latestBlogsData);
+  // console.log(teamData);
+
+
+
+
 
   const services = [
     {
@@ -155,7 +214,7 @@ export default function Home() {
       </div>
 
 
-      <div className="bg-orange-50  mb-32 py-28 pb-40 relative">
+      <div className="  mb-32 py-28 pb-40 relative">
         <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center pb-5 mx-auto mb-14 md:mb-28  rounded-lg ">
           <Title text="Our" highlited="Services" textColor="--black_color" />
         </div>
@@ -189,9 +248,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="bg-orange-50 mt-20 md:mt-32  py-24 home-team relative">
+      <div className=" mt-20 md:mt-32  py-24 home-team relative">
         <div className="container px-4  md:px-14 mx-auto ">
-          <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center  mx-auto mb-14 md:mb-20 *:!text-[3rem]  rounded-lg bg-orange-50">
+          <div className="md:w-[90%] xl:w-[70%] 2xl:w-[50%] text-center  mx-auto mb-14 md:mb-20 *:!text-[3rem]  rounded-lg ">
             <Title text="Our" highlited="Team" textColor="--black_color" />
           </div>
           <div className="absolute bottom-[12%] md:bottom-0 left-0 w-[50%] md:w-[33%] opacity-90 md:opacity-50 z-10">
@@ -206,7 +265,7 @@ export default function Home() {
           <div className="absolute top-[12%] md:top-0 right-0 w-[50%] md:w-[33%] opacity-90 md:opacity-50 z-10">
             <Image alt="" src={svgImg} className="text-black"></Image>
           </div>
-          <div className="mx-2 md:mx-0 bg-orange-50">
+          <div className="mx-2 md:mx-0">
             <Team />
           </div>
         </div>

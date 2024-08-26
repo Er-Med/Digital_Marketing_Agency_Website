@@ -86,7 +86,7 @@ export default function page() {
                 <div className="lg:w-[80%] mx-auto">
                     <Hero title="About Us" desc="Notre identité est façonnée par notre passion pour l'innovation et notre engagement envers l'excellence"
                         btnHref="/contact"
-                        btnText="Join our Team"
+                        btnText="Contactez-nous"
                         btnType="primary"
                         titileSize="100px"
                     />
@@ -118,7 +118,7 @@ export default function page() {
             </div>
 
             {/* START FEATURES SECTION */}
-            <section className="bg-orange-50 py-32">
+            <section className=" py-32">
                 <div className="container px-4  md:px-14 mx-auto">
                     <div className="mx-auto md:w-[70%] text-center mb-24">
                         <Title text="Au Cœur de Notre Engagement et de Notre Travail" highlited="Notre Travail" textColor="var(--black_color)" />

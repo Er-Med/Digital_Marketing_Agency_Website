@@ -5,12 +5,12 @@ import { PiArrowRightFill } from "react-icons/pi";
 //     isSecond?: boolean;
 // };
 export default function Button({ type = "primary", href, text = "Say Hello" }: { type: string, text: string, href: string }) {
-    // const buttonType = isSecond ? 'secand_button' : '';
+    // const buttonType = isSecond ? 'second_button' : '';
 
     let buttonType;
     switch (type) {
         case "second":
-            buttonType = 'secand_button'
+            buttonType = 'second_button'
             break;
         case "third":
             buttonType = 'third_button'
