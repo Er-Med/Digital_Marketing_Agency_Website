@@ -1,10 +1,10 @@
-import Footer from "../ui/Footer";
+import Footer from "../_ui/Footer";
 import "@/app/styles.scss"
-import { Header } from "../ui/Header";
-import LatestNews from "../ui/LatestNews";
-import NewsBanner from "../ui/BlogsBanner";
-import Team from "../ui/Team";
-import Hero from "../ui/Hero";
+import { Header } from "../_ui/Header";
+import LatestNews from "../_ui/LatestNews";
+import NewsBanner from "../_ui/BlogsBanner";
+import Team from "../_ui/Team";
+import Hero from "../_ui/Hero";
 
 export default function page() {
     return (

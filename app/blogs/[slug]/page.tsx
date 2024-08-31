@@ -1,11 +1,11 @@
-import Footer from "@/app/ui/Footer";
-import { Header } from "@/app/ui/Header";
-import { blogPosts } from "@/app/lib/blogsApi";
+import Footer from "@/app/_ui/Footer";
+import { Header } from "@/app/_ui/Header";
+import { blogPosts } from "@/app/_lib/blogsApi";
 import Link from "next/link";
 import Image from "next/image";
 import { PiArrowRightFill } from "react-icons/pi";
 import "@/app/styles.scss"
-import BlogsBanner from "@/app/ui/BlogsBanner";
+import BlogsBanner from "@/app/_ui/BlogsBanner";
 
 
 export default function page({ params }: { params: any }) {

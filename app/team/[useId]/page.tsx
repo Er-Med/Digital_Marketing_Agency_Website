@@ -1,11 +1,11 @@
-import Footer from "@/app/ui/Footer";
-import { Header } from "@/app/ui/Header";
-import NewsBanner from "@/app/ui/BlogsBanner";
+import Footer from "@/app/_ui/Footer";
+import { Header } from "@/app/_ui/Header";
+import NewsBanner from "@/app/_ui/BlogsBanner";
 import { useRouter } from "next/router";
 import "@/app/styles.scss"
 import Image from "next/image";
 import slideimag from "@/public/images/projImg.png"
-import SocialBtns from "@/app/ui/SocialBtns";
+import SocialBtns from "@/app/_ui/SocialBtns";
 
 export default function TeamMember() {
 

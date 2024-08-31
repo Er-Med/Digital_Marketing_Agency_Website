@@ -18,18 +18,20 @@ async function getHeroSectionData() {
 
 //Get WhatWeDoSection Data
 async function getWhatWeDoSectionData() {
- return await fetchStrapiData("/homepage?populate[0]=WhatWeDoSection&populate[1]=WhatWeDoSection.button&populate[2]=WhatWeDoSection.title")
+ return await fetchStrapiData("/homepage?populate[0]=whatWeDoSection&populate[1]=whatWeDoSection.button&populate[2]=whatWeDoSection.title")
 }
 
 //Get ClientsSection Data
 async function getClientsSectionData() {
- return await fetchStrapiData("/homepage?populate[0]=ClientsSection&populate[1]=ClientsSection.clients")
+ return await fetchStrapiData("/homepage?populate=ClientsSection.clients.image")
 }
 
 //Get ServicesSection Data
 async function getServicesSectionData() {
- return await fetchStrapiData("/homepage?populate[0]=ServicesSection&populate[1]=ServicesSection.services&populate[2]=ServicesSection.title")
+ return await fetchStrapiData("/homepage?populate[0]=ServicesSection.title&populate[1]=ServicesSection.services.img&populate[2]=ServicesSection.services.sousServices.img")
 }
+
+
 
 //Get Testimonials Data
 async function getTestimonialsData() {
@@ -50,8 +52,9 @@ async function getTeamData() {
 
 // Get Header Data
 async function getHeaderData() {
- return await fetchStrapiData("/header?populate[NavigationLinks][populate][subLinks][populate][sub_services][populate]=*&populate=logo_image")
+ return await fetchStrapiData("/Header?populate[NavigationLinks][populate][subLinks][populate][sub_subServices][populate]=*&populate=logo_image")
 }
+
 
 // Get Footer Data
 async function getFooterData() {
@@ -70,7 +73,7 @@ async function getClientsData() {
 
 // Get services Data
 async function getServicesData() {
- return await fetchStrapiData(`/Services?populate=*`)
+ return await fetchStrapiData(`/Services?populate[img]=*&populate[button]=*&populate[sousServices][populate]=img`)
 }
 
 // Get Statistics Data
@@ -82,6 +85,8 @@ async function getStatisticsData() {
 async function getTeamMembersData() {
  return await fetchStrapiData(`/Team-members?populate=*`)
 }
+
+
 
 export {
  getHeroSectionData,
@@ -97,6 +102,7 @@ export {
  getClientsData,
  getServicesData,
  getStatisticsData,
- getTeamMembersData
+ getTeamMembersData,
+ baseUrl
 
 }

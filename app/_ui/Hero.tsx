@@ -1,5 +1,5 @@
 import svgImg from "@/public/squares.svg"
-import { syne, nunito } from "@/app/ui/fonts"
+import { syne, nunito } from "@/app/_ui/fonts"
 import Button from "./Button"
 import Image from "next/image";
 

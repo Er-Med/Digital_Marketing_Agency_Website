@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 // import { Inter } from "next/font/google";
-import { nunito, syne } from "@/app/ui/fonts";
+import { nunito, syne } from "@/app/_ui/fonts";
 import "./globals.css";
-import { Header } from "./ui/Header";
-import Footer from "./ui/Footer";
-import ScrollButton from "./ui/ScrollButton";
+import { Header } from "./_ui/Header";
+import Footer from "./_ui/Footer";
+import ScrollButton from "./_ui/ScrollButton";
 
 export const metadata: Metadata = {
   title: "Create Next App",

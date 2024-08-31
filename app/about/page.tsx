@@ -1,14 +1,14 @@
-import Footer from "../ui/Footer";
+import Footer from "../_ui/Footer";
 import "@/app/styles.scss"
-import { Header } from "../ui/Header";
-import Statistics from "../ui/Statistics";
-import Clients from "../ui/Clients";
-import Hero from "../ui/Hero";
-import Title from "../ui/Title";
+import { Header } from "../_ui/Header";
+import Statistics from "../_ui/Statistics";
+import Clients from "../_ui/Clients";
+import Hero from "../_ui/Hero";
+import Title from "../_ui/Title";
 import Image from "next/image";
 import img from "@/public/images/Wavy_Tech-30_Single-02.jpg"
 import { MdAccessibilityNew } from "react-icons/md";
-import NewsBanner from "../ui/BlogsBanner";
+import NewsBanner from "../_ui/BlogsBanner";
 
 const texts = [
     {

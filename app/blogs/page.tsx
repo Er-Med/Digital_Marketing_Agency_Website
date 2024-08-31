@@ -1,17 +1,23 @@
 import Image from "next/image";
-import Footer from "../ui/Footer";
-import { Header } from "../ui/Header";
+import Footer from "../_ui/Footer";
+import { Header } from "../_ui/Header";
 import blogimg from "@/public/images/images-1000x500.jpg"
 import Link from "next/link";
 import { PiArrowRightFill } from "react-icons/pi";
 import "@/app/styles.scss"
-import Title from "../ui/Title";
-import { blogPosts } from "../lib/blogsApi";
-import NewsBanner from "../ui/BlogsBanner";
-import BlogsBanner from "../ui/BlogsBanner";
-import Hero from "../ui/Hero";
-export default function page() {
+import Title from "../_ui/Title";
+import { blogPosts } from "../_lib/blogsApi";
+import NewsBanner from "../_ui/BlogsBanner";
+import BlogsBanner from "../_ui/BlogsBanner";
+import Hero from "../_ui/Hero";
 
+
+export default async function Page() {
+
+    const req = await fetch("http://localhost:1337/api/Blogs?populate=*")
+    const data = await req.json()
+    const blogs = data.data;
+    console.log(blogs);
 
     return (
         <div>

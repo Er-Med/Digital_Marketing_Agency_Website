@@ -1,10 +1,10 @@
-import Footer from "../ui/Footer";
-import { Header } from "../ui/Header";
-import Hero from "../ui/Hero";
+import Footer from "../_ui/Footer";
+import { Header } from "../_ui/Header";
+import Hero from "../_ui/Hero";
 import "@/app/styles.scss"
-import NewsBanner from "../ui/BlogsBanner";
-import SocialBtns from "../ui/SocialBtns";
-import ContactFrom from "../ui/ContactFrom";
+import NewsBanner from "../_ui/BlogsBanner";
+import SocialBtns from "../_ui/SocialBtns";
+import ContactFrom from "../_ui/ContactFrom";
 export default function page() {
     return (
         <div className="contact">
