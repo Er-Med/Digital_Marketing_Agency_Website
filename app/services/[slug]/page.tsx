@@ -62,6 +62,7 @@ export default function ServicePage({ params }: Props) {
             try {
                 const data = await getServicesData();
                 const services = data.data;
+
                 const currentService = services.find((item: any) => item.attributes.slug == slug)
                 setServiceData(currentService.attributes);
             } catch (err) {

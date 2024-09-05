@@ -26,6 +26,14 @@ import ScrollButton from "./_ui/ScrollButton";
 import { getHeroSectionData, getWhatWeDoSectionData, getClientsSectionData, getServicesSectionData, getTestimonialsData, getLatestBlogsData, getTeamData } from "./_lib/data";
 import HeroSection from "./_ui/HeroSection";
 
+
+const content: BlocksContent = [
+  {
+    type: 'paragraph',
+    children: [{ type: 'text', text: 'A simple paragraph' }],
+  },
+];
+
 export default function Home() {
   const [heroSectionData, setHeroSectionData] = useState(null);
   const [whatWeDoSectionData, setWhatWeDoSectionData] = useState(null);

@@ -18,7 +18,6 @@ interface Statistic {
 
 export default function Statistics() {
 
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [statistics, setStatistics] = useState<Statistic[]>()

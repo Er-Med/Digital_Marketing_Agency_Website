@@ -1,3 +1,5 @@
+"use client"
+
 import Footer from "../_ui/Footer";
 import "@/app/styles.scss"
 import { Header } from "../_ui/Header";
@@ -9,6 +11,10 @@ import Image from "next/image";
 import img from "@/public/images/Wavy_Tech-30_Single-02.jpg"
 import { MdAccessibilityNew } from "react-icons/md";
 import NewsBanner from "../_ui/BlogsBanner";
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { baseUrl, getAboutPageData } from "../_lib/data";
+import FAQ from "../_ui/FAQ";
+import Features from "../_ui/Features";
 
 const texts = [
     {
@@ -79,108 +85,84 @@ const faq = [
     },
 
 ]
-export default function page() {
+export default function Page() {
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [pageData, setPageData] = useState<any>()
+    const apiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
+
+
+    useEffect(() => {
+        async function fetchStatisticsData() {
+            try {
+                const data = await getAboutPageData();
+                setPageData(data)
+
+            } catch (err) {
+                setError("Failed to fetch data");
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchStatisticsData()
+    }, [])
+
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: slug {error}</div>;
+    if (!pageData) return <div>error</div>;
+
+
+
     return (
         <div>
             <div className="container px-4  md:px-14 mx-auto">
                 <div className="lg:w-[80%] mx-auto">
-                    <Hero title="About Us" desc="Notre identité est façonnée par notre passion pour l'innovation et notre engagement envers l'excellence"
+                    <Hero title={pageData.pageHero.title} desc={pageData.pageHero.desc}
                         btnHref="/contact"
-                        btnText="Contactez-nous"
-                        btnType="primary"
+                        btnText={pageData.pageHero.buttonText}
+                        btnType={pageData.pageHero.buttonType}
                         titileSize="100px"
                     />
                 </div>
 
+                {/* CLIENTS SECTION */}
                 <section className="mb-24 lg:mb-32 mt-24 lg:mt-0">
                     <Statistics />
                 </section>
 
-                <section className="mb-24 md:mb-32 grid " >
+                <section className="mb-24 md:mb-32 grid gap-5" >
                     {
-                        texts.map((ele, index) => (
-
-                            <div className="grid lg:grid-cols-2  gap-y-5  items-center" key={index}>
-                                <div className={`  ${index % 2 !== 0 ? "lg:order-2" : ''}`}>
-                                    <h2 className="mb-4 lg:mb-8 text-3xl lg:text-5xl text-center lg:text-start font-bold">{ele.title}</h2>
-                                    <p className="text-lg lg:text-xl font-medium  mb-10 text-[#4b5563] text-center lg:text-justify border-b pb-4 lg:border-0 lg:pb-0">{ele.text}</p>
+                        pageData.simpleSections.map((s: { id: number; title: string; imgData: { src: any; }; }) => (
+                            <div className="grid lg:grid-cols-2  gap-y-5  items-center" key={s.id}>
+                                <div className={`  ${s.id % 2 !== 0 ? "lg:order-2" : ''}`}>
+                                    <h2 className="mb-4 lg:mb-8 text-3xl lg:text-5xl text-center lg:text-start font-bold">{s.title}</h2>
+                                    <p className="text-lg lg:text-xl font-medium  mb-10 text-[#4b5563] text-center lg:text-justify border-b pb-4 lg:border-0 lg:pb-0">{s.description}</p>
                                 </div>
-                                <Image src={img} alt="about us image" className="hidden lg:block rounded-md  h-full object-cover w-full" />
+                                <div className="w-full h-full relative">
+                                    <Image src={`${apiUrl}${s.imgData.src}`} alt="about us image" className="hidden lg:block rounded-md  h-full w-full object-fill" layout="fill" />
+                                </div>
                             </div>
                         ))
                     }
                 </section>
 
-
+                {/* CLIENTS SECTION */}
                 <div className="mb-24">
                     <Clients />
                 </div>
             </div>
 
-            {/* START FEATURES SECTION */}
-            <section className=" py-32">
-                <div className="container px-4  md:px-14 mx-auto">
-                    <div className="mx-auto md:w-[70%] text-center mb-24">
-                        <Title text="Au Cœur de Notre Engagement et de Notre Travail" highlited="Notre Travail" textColor="var(--black_color)" />
-                    </div>
+            {/* FEATURES SECTION */}
+            <Features data={pageData.engagementSection} />
 
-                    <div className=" grid grid-cols-1 gap-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+            {/* FAQ SECTION*/}
+            <FAQ />
 
-                        {
-                            features.map((ele, index) => (
-                                <div key={index} className="flex flex-col gap-5 mb-10 items-center ">
-                                    <div className="text-[5rem]">
-                                        {ele.icon}
-                                    </div>
-                                    <h3 className="text-2xl font-medium capitalize">{ele.title}</h3>
-                                    <p className="text-center">{ele.desc}</p>
-                                </div>
-
-                            ))
-                        }
-
-                    </div>
-                </div>
-            </section>
-            {/* END FEATURES SECTION */}
-
-            {/* START FAQ SECTION*/}
-            <section className="lg:w-[80%] mx-auto py-32">
-                <div className="container px-4  md:px-14 mx-auto">
-                    <div className="mb-14 md:mb-20 text-center w-full">
-                        <Title text=" " highlited="FAQ" />
-                    </div>
-
-                    <div className="  mx-auto mt-8 md:w-4/6 divide-y">
-                        {
-                            faq.map((faq, index) => (
-                                <div className="py-8" key={index}>
-                                    <details className=" group" >
-                                        <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                            <h3 className="text-2xl  font-semibold"> {faq.quetion}</h3>
-                                            <span className="transition group-open:rotate-180">
-                                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
-                                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
-                                                    <path d="M6 9l6 6 6-6"></path>
-                                                </svg>
-                                            </span>
-                                        </summary>
-                                        <p className="group-open:animate-fadeIn mt-3 text-lg leading-relaxed text-gray-700">{faq.answer}
-                                        </p>
-                                    </details>
-                                </div>
-                            ))}
-                    </div>
-                </div>
-
-
-            </section >
-            {/* END FAQ SECTION */}
-
-            <div>
+            {/* <div>
                 <NewsBanner />
-            </div>
+            </div> */}
         </div >
     )
 }
