@@ -70,9 +70,7 @@ export default async function ServicePage({ params }: { params: any }) {
         </section>
       </div>
 
-      <div>
-        <NewsBanner />
-      </div>
+      <div>{/* <NewsBanner /> */}</div>
     </Transition>
   );
 }

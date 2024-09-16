@@ -5,7 +5,13 @@ const nextConfig = {
         includePaths: [path.join(dirname('styles'))],
     },
     images: {
-        domains: ['www.pexels.com', 'localhost'],
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'localhost',
+            },
+        ],
+        // remotePatterns: ['www.pexels.com', 'localhost'],
     },
 };
 
