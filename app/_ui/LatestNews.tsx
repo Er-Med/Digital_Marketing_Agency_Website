@@ -32,9 +32,10 @@ export default async function LatestNews() {
       </div>
       <div className='latests md:w-[60%] mx-auto'>
         {sectionData.blogs.map((blog: any, index: string) => (
-          <FadeRight delay={+index}>
+          <FadeRight
+            delay={+index}
+            key={index}>
             <Link
-              key={index}
               href={`blogs/${blog.slug}`}
               className='blog mb-8'>
               <div className='flex items-center mb-5 md:mb-7 md:gap-7 '>

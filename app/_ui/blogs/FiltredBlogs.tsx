@@ -35,10 +35,8 @@ export default function FiltredBlogs({ blogs }: FiltredBlogsProps) {
     <section className='grid md:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-10 items-center mt-14 nd:mt-20 lg:w-[90%] mx-auto'>
       {blogs.length > 0 ? (
         blogs.map((blog) => (
-          <ScaleUpAnimation>
-            <div
-              className='flex flex-col shadow-md rounded-md overflow-hidden hover:scale-105 transition-all'
-              key={blog.id}>
+          <ScaleUpAnimation key={blog.id}>
+            <div className='flex flex-col shadow-md rounded-md overflow-hidden hover:scale-105 transition-all'>
               <div className='w-full relative'>
                 <Image
                   className='object-cover max-h-5xl w-full object-covers mb-4 aspect-[16/14] min-h-full absol'
