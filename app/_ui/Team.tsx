@@ -1,134 +1,95 @@
-'use client'
 import Image from "next/image";
-import blogimg from "@/public/images/men.png"
-import Link from "next/link";
-import { PiArrowRightFill } from "react-icons/pi";
 import Button from "./Button";
-// import teamApi from "@/app/lib/TeamApis"
+import { headers } from "next/headers";
+import { fetchData, strapiUrl } from "../_lib/data";
+import ScaleUpAnimation from "./animations/ScaleUpAnimation";
 
-import { usePathname } from 'next/navigation'
-import { log } from "console";
-import { useEffect, useState } from "react";
-
-type ImageAttributes = {
-    name: string;
-    url: string;
-    width: number;
-    height: number;
-    alternativeText: string | null;
+interface ProfileImage {
+  url: string;
 }
 
-type ProfileImage = {
-    data: {
-        id: number;
-        attributes: ImageAttributes;
-    }[];
+interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  imageUrl: string;
 }
 
-type MemberAttributes = {
-    name: string;
-    job: string;
-    profile_image: ProfileImage;
+interface TeamApiResponse {
+  data: {
+    id: number;
+    attributes: {
+      name: string;
+      job: string;
+      profile_image: {
+        data: {
+          attributes: {
+            url: string;
+          };
+        };
+      };
+    };
+  }[];
 }
 
-type Member = {
-    attributes: MemberAttributes;
-}
-export default function Team() {
-    const [teamMembers, setTeamMembers] = useState([])
+export default async function Team() {
+  const headerList = headers();
+  const pathname = headerList.get("x-current-path") || "";
 
-    // const getTeamMembers_ = () => {
-    //     TeamApis.getTeamMembers().then(res => {
-    //         setTeamMembers(res.data.data)
+  // Fetching team members from Strapi API
+  const response = (await fetchData(
+    "/Team-members?populate=*"
+  )) as TeamApiResponse;
+  const teamMembers: TeamMember[] = response.data.map(({ id, attributes }) => ({
+    id,
+    name: attributes.name,
+    role: attributes.job,
+    imageUrl: `${strapiUrl}${attributes.profile_image.data.attributes.url}`,
+  }));
 
-    //     })
-    // }
+  // Limit displayed members on home or about page
+  const isHomeOrAbout = pathname === "/" || pathname === "/about";
+  const displayedMembers = isHomeOrAbout
+    ? teamMembers.slice(0, 3)
+    : teamMembers;
 
-    // useEffect(() => {
-    //     getTeamMembers_();
-    // }, [])
-
-    // // Log the teamMembers state whenever it changes
-    // useEffect(() => {
-    //     // console.log("Updated team members:", teamMembers);
-    // }, [teamMembers]); // Runs whenever teamMembers changes
-
-    const team = [{
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },
-    {
-        image: blogimg,
-        name: "David Jamaes",
-        role: "Web App"
-    },]
-
-
-    const pathname = usePathname()
-    let homeTeam = team.slice(0, 6)
-    return (
-        <div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-y-9 gap-12 md:w-[70%] mx-auto z-20 relative">
-                {
-                    team.map((member, index) => (
-                        <div key={index} className=" flex flex-col items-center [box-shadow:rgba(17,_17,_26,_0.1)_0px_8px_24px,_rgba(17,_17,_26,_0.1)_0px_16px_56px,_rgba(17,_17,_26,_0.1)_0px_24px_80px] filter duration-300 grayscale-[1.4] hover:grayscale-0 rounded-sm">
-                            <div className="member w-full  rounded-sm overflow-hidden" >
-                                <Image className="object-covers w-full  duration-200 aspect-square " src={member.image} alt="member image" width={500} height={500} />
-                            </div>
-                            <div className="desc flex flex-col items-center mt-3 pb-4">
-                                <h3 className="text-xl font-semibold mb-1 text-[--black_color]">{member.name}</h3>
-                                <p className="text-[--primary_color] text-lg">{member.role}</p>
-                            </div>
-                        </div>
-                    ))
-                }
-
+  return (
+    <>
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-y-9 gap-12 mx-auto z-20 relative'>
+        {displayedMembers.map(({ id, name, role, imageUrl }) => (
+          <ScaleUpAnimation key={id}>
+            <div>
+              <div className='bg-gray-100 relative shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl p-4 md:p-5 transition-all duration-500 transform'>
+                <div className='flex items-center gap-2 md:gap-4'>
+                  <Image
+                    className='w-[100px] h-[100px] shadow-lg rounded-full duration-200 m-6 aspect-square p-1 bg-gradient-to-r from-orange-500 via-red-600 to-amber-200'
+                    src={imageUrl}
+                    alt={`${name}'s image`}
+                    width={500}
+                    height={500}
+                  />
+                  <div className='w-fit transition-all transform duration-500'>
+                    <h3 className='text-[--black_color] text-[1.1rem] md:text-[1.5rem] font-bold'>
+                      {name}
+                    </h3>
+                    <p className='text-gray-400'>{role}</p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </ScaleUpAnimation>
+        ))}
+      </div>
 
-            {
-                pathname == "/" ? (
-                    <div className="w-fit mx-auto mt-16 ">
-                        <Button text="All team" href="/team" type="third" />
-                    </div>
-                ) : ""
-            }
-
+      {isHomeOrAbout && (
+        <div className='w-fit mx-auto mt-16'>
+          <Button
+            text='All team'
+            href='/team'
+            type='second'
+          />
         </div>
-    );
+      )}
+    </>
+  );
 }
