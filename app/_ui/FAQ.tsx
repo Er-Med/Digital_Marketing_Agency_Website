@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { fetchData, getFAQData } from "../_lib/data";
+import { fetchData } from "../_lib/data";
 import Title from "./Title";
 
 export default async function FAQ() {
