@@ -47,8 +47,7 @@ export default async function page({ params }: { params: any }) {
   // get three posts have the same category
   async function getRelationBlogs() {
     const res = await fetchData(
-      `/blogs?filters[category][$eq]=${blogCategory}&populate=cover&pagination[pageSize]=3`,
-      "no-store"
+      `/blogs?filters[category][$eq]=${blogCategory}&populate=cover&pagination[pageSize]=3`
     );
 
     const posts = res.data;

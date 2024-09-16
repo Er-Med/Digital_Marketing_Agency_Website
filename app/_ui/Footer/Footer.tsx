@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
 import { RiTwitterXLine } from "react-icons/ri";
 
 export default async function Footer() {
-  const res = await fetchData("/footer?populate=*", "no-store");
+  const res = await fetchData("/footer?populate=*");
   const footerData = res.data.attributes;
   const logoImg = strapiUrl + res.data.attributes.logo.data.attributes.url;
 

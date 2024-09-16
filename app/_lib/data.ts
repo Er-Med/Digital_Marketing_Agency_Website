@@ -7,8 +7,7 @@ async function fetchData(
 ) {
  try {
   const options: RequestInit = {
-   cache: cacheConfig ? cacheConfig : undefined,
-   next: { revalidate: 60 }
+   cache: cacheConfig ? cacheConfig : undefined
   };
   const res = await fetch(`${baseUrl}${endpoint}`, options)
   let data = await res.json();
