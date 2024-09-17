@@ -19,6 +19,9 @@ export default async function HeroSection() {
   const data = await fetchData(
     "/homepage?populate[0]=HeroSection&populate[1]=HeroSection.button"
   );
+
+  console.log(data);
+
   const sectionData = data?.data.attributes.HeroSection;
 
   return (

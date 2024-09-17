@@ -1,19 +1,47 @@
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL
 
+// async function fetchData(
+//  endpoint: string,
+//  cacheConfig: RequestCache = 'default',
+// )
+//  {
+//  try {
+//   const options: RequestInit = {
+//    cache: cacheConfig ? cacheConfig : undefined
+//   };
+//   const res = await fetch(`${baseUrl}${endpoint}`, options)
+//   let data = await res.json();
+//   return data
+//  } catch (err) {
+//   throw new Error("Please check if your server is running and you set all the required tokens")
+//  }
+// }
+
+const apiKey = process.env.NEXT_PUBLIC_REST_API_KEY;
+
 async function fetchData(
  endpoint: string,
- cacheConfig: RequestCache = 'default',
 ) {
  try {
-  const options: RequestInit = {
-   cache: cacheConfig ? cacheConfig : undefined
-  };
-  const res = await fetch(`${baseUrl}${endpoint}`, options)
-  let data = await res.json();
-  return data
- } catch (err) {
-  throw new Error("Please check if your server is running and you set all the required tokens")
+  const response = await fetch(`${baseUrl}${endpoint}`, {
+   method: 'GET', // or 'POST', 'PUT', etc. based on your need
+   headers: {
+    'Authorization': `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+   },
+  });
+
+
+  if (!response.ok) {
+   throw new Error('Failed to fetch data');
+  }
+
+  const data = await response.json();
+  return data;
+ } catch (error) {
+  console.error('Error fetching data:', error);
+  throw error;
  }
 }
 
